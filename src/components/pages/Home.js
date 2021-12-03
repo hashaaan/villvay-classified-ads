@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Container, Grid } from "@mui/material";
 
 import ItemCard from "../ItemCard";
@@ -9,6 +9,10 @@ import { AppContext } from "../../context/AppContext";
 const Home = () => {
   const appContext = useContext(AppContext);
   const [itemsToShow, setItemsToShow] = useState(appContext.items);
+
+  useEffect(() => {
+    setItemsToShow(appContext.items);
+  }, [appContext.items]);
 
   const handleCategorySelect = (category) => {
     if (category === "all") {

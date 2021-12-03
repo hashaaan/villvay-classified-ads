@@ -17,10 +17,20 @@ function App() {
     setItemsState(newItems);
   };
 
+  const handleAddItem = (item) => {
+    const newItems = [...itemsState];
+    newItems.push(item);
+    setItemsState(newItems);
+  };
+
   return (
     <>
       <AppContext.Provider
-        value={{ items: itemsState, addToFavorites: handleAddToFavourites }}
+        value={{
+          items: itemsState,
+          addToFavorites: handleAddToFavourites,
+          addItem: handleAddItem,
+        }}
       >
         <BrowserRouter>
           <Routes>

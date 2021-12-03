@@ -8,7 +8,10 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Drawer,
 } from "@mui/material";
+
+import NewClassified from "../forms/NewClassified";
 
 const categories = [
   { id: 1, name: "All", value: "all" },
@@ -24,45 +27,63 @@ const categories = [
 
 const TopBar = ({ onSelectCategory }) => {
   const [category, setCategory] = useState("all");
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-    onSelectCategory(event.target.value);
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    onSelectCategory(e.target.value);
+  };
+
+  const toggleDrawer = (open) => (e) => {
+    if (e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
+      return;
+    }
+    setDrawerOpen(open);
   };
 
   return (
-    <Container maxWidth="lg">
-      <Toolbar disableGutters sx={{ height: 100 }}>
-        <Box sx={{ mr: "auto", display: { md: "flex" } }}>
-          <FormControl sx={{ minWidth: 180 }}>
-            <InputLabel id="ca-select-label">Categories</InputLabel>
-            <Select
-              labelId="ca-select-label"
-              id="ca-select"
-              value={category}
-              label="Categories"
-              onChange={handleCategoryChange}
+    <>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters sx={{ height: 100 }}>
+          <Box sx={{ mr: "auto", display: { md: "flex" } }}>
+            <FormControl sx={{ minWidth: 180 }}>
+              <InputLabel id="ca-select-label">Categories</InputLabel>
+              <Select
+                labelId="ca-select-label"
+                id="ca-select"
+                value={category}
+                label="Categories"
+                onChange={handleCategoryChange}
+              >
+                {categories.map(({ id, name, value }) => (
+                  <MenuItem key={id} value={value}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ borderRadius: 20 }}
+              size="large"
+              onClick={toggleDrawer(true)}
             >
-              {categories.map(({ id, name, value }) => (
-                <MenuItem key={id} value={value}>
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ borderRadius: 20 }}
-            size="large"
-          >
-            New Classified
-          </Button>
-        </Box>
-      </Toolbar>
-    </Container>
+              New Classified
+            </Button>
+          </Box>
+        </Toolbar>
+      </Container>
+      {/* App Drawer */}
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
+        <NewClassified
+          onClose={() => setDrawerOpen(false)}
+          categories={categories}
+        />
+      </Drawer>
+    </>
   );
 };
 
