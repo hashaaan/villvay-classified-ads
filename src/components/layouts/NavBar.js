@@ -15,7 +15,7 @@ const NavBar = ({ page }) => {
   };
 
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="static" color="default" sx={{ backgroundColor: "#FFF" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ minHeight: "unset !important" }}>
           <Typography
