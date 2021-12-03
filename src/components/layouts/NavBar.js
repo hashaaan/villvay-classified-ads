@@ -16,7 +16,7 @@ const NavBar = ({ page }) => {
 
   return (
     <AppBar position="static" color="default" sx={{ backgroundColor: "#FFF" }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Toolbar disableGutters sx={{ minHeight: "unset !important" }}>
           <Typography
             variant="h6"
@@ -31,9 +31,9 @@ const NavBar = ({ page }) => {
             <Tabs
               value={page}
               onChange={handleTabClick}
-              textColor="secondary"
-              indicatorColor="secondary"
-              aria-label="secondary tabs example"
+              textColor="primary"
+              indicatorColor="primary"
+              aria-label="navigation tabs"
             >
               <Tab value={"home"} label="Home" />
               <Tab value={"favourites"} label="Favourites" />

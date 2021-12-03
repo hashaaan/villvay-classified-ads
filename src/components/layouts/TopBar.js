@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   Container,
@@ -21,19 +22,26 @@ const categories = [
   { id: 9, name: "Commercial", value: "commercial" },
 ];
 
-const TopBar = () => {
+const TopBar = ({ onSelectCategory }) => {
+  const [category, setCategory] = useState("all");
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+    onSelectCategory(event.target.value);
+  };
+
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <Toolbar disableGutters sx={{ height: 100 }}>
         <Box sx={{ mr: "auto", display: { md: "flex" } }}>
-          <FormControl sx={{ m: 1, minWidth: 180 }}>
+          <FormControl sx={{ minWidth: 180 }}>
             <InputLabel id="ca-select-label">Categories</InputLabel>
             <Select
               labelId="ca-select-label"
               id="ca-select"
-              //value={age}
+              value={category}
               label="Categories"
-              onChange={(e) => console.log(e.target.value)}
+              onChange={handleCategoryChange}
             >
               {categories.map(({ id, name, value }) => (
                 <MenuItem key={id} value={value}>
@@ -46,7 +54,7 @@ const TopBar = () => {
         <Box>
           <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             sx={{ borderRadius: 20 }}
             size="large"
           >

@@ -5,7 +5,7 @@ const Favourites = () => {
   return (
     <>
       <NavBar page="favourites" />
-      <TopBar page="favourites" />
+      <TopBar page="favourites" onSelectCategory={() => {}} />
     </>
   );
 };
