@@ -1,7 +1,14 @@
-import { Box, Card, CardContent, Typography, IconButton } from "@mui/material";
-import { FavoriteBorder } from "@mui/icons-material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardActionArea,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { FavoriteBorder, Favorite } from "@mui/icons-material";
 
-const ItemCard = ({ item, onClick }) => {
+const ItemCard = ({ item, onClick, onFavorite }) => {
   return (
     <Card>
       <Box
@@ -19,7 +26,7 @@ const ItemCard = ({ item, onClick }) => {
           sx={[
             {
               backgroundColor: "#FFF",
-              color: "rgba(0, 0, 0, 0.4)",
+              color: item.isFavourite ? "#1976d2" : "#969696",
               margin: "10px",
               height: "40px",
               float: "right",
@@ -31,29 +38,32 @@ const ItemCard = ({ item, onClick }) => {
               },
             },
           ]}
+          onClick={() => onFavorite(item)}
         >
-          <FavoriteBorder />
+          {item.isFavourite ? <Favorite /> : <FavoriteBorder />}
         </IconButton>
       </Box>
-      <CardContent>
-        <Typography
-          sx={{ fontSize: 10, fontWeight: "600", letterSpacing: 1 }}
-          gutterBottom
-        >
-          {item.category.toUpperCase()}
-        </Typography>
-        <Typography
-          gutterBottom
-          sx={{ fontWeight: "500" }}
-          variant="h5"
-          component="div"
-        >
-          {item.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {item.description}
-        </Typography>
-      </CardContent>
+      <CardActionArea onClick={onClick}>
+        <CardContent>
+          <Typography
+            sx={{ fontSize: 10, fontWeight: "600", letterSpacing: 1 }}
+            gutterBottom
+          >
+            {item.category.toUpperCase()}
+          </Typography>
+          <Typography
+            gutterBottom
+            sx={{ fontWeight: "500" }}
+            variant="h5"
+            component="div"
+          >
+            {item.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {item.description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 };

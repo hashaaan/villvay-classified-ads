@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Container, Grid } from "@mui/material";
 
 import ItemCard from "../ItemCard";
 import NavBar from "../layouts/NavBar";
 import TopBar from "../layouts/TopBar";
-import { items } from "../../data/items";
+import { AppContext } from "../../context/AppContext";
 
 const Home = () => {
-  const [itemsToShow, setItemsToShow] = useState(items);
+  const appContext = useContext(AppContext);
+  const [itemsToShow, setItemsToShow] = useState(appContext.items);
 
   const handleCategorySelect = (category) => {
     if (category === "all") {
-      setItemsToShow(items);
+      setItemsToShow(appContext.items);
     } else {
-      setItemsToShow(items.filter((item) => item.category === category));
+      setItemsToShow(
+        appContext.items.filter((item) => item.category === category)
+      );
     }
   };
 
@@ -30,7 +33,11 @@ const Home = () => {
           {itemsToShow.length > 0 &&
             itemsToShow.map((item, index) => (
               <Grid item xs={2} sm={4} md={4} key={index}>
-                <ItemCard item={item} />
+                <ItemCard
+                  item={item}
+                  onClick={() => {}}
+                  onFavorite={appContext.addToFavorites}
+                />
               </Grid>
             ))}
         </Grid>
