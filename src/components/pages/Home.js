@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 
 import ItemCard from "../ItemCard";
 import NavBar from "../layouts/NavBar";
 import TopBar from "../layouts/TopBar";
-import { AppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 
 const Home = () => {
-  const appContext = useContext(AppContext);
+  const appContext = useAppContext();
   const [itemsToShow, setItemsToShow] = useState(appContext.items);
 
   useEffect(() => {

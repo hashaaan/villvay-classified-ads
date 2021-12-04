@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Card,
@@ -11,12 +11,12 @@ import {
 import { ArrowBack } from "@mui/icons-material";
 
 import NavBar from "../layouts/NavBar";
-import { AppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 
 const AdDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const appContext = useContext(AppContext);
+  const appContext = useAppContext();
   const [ad, setAd] = useState(null);
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const AdDetails = () => {
               color: "#646464",
               margin: "0 10px",
               height: "40px",
+              float: "left",
             },
             {
               "&:hover": {
@@ -53,7 +54,7 @@ const AdDetails = () => {
         >
           <ArrowBack />
         </IconButton>
-        <Card sx={{ maxWidth: "80%" }}>
+        <Card sx={{ width: "80%" }}>
           <CardMedia
             component="img"
             height="400"

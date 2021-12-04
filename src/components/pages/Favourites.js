@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Container, Grid } from "@mui/material";
 
 import ItemCard from "../ItemCard";
 import NavBar from "../layouts/NavBar";
 import TopBar from "../layouts/TopBar";
-import { AppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 
 const Favourites = () => {
-  const appContext = useContext(AppContext);
+  const appContext = useAppContext();
   const favourites = appContext.items.filter((item) => item.isFavourite);
   const [itemsToShow, setItemsToShow] = useState(favourites);
 

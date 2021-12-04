@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
   Button,
@@ -13,14 +13,14 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import { AppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 
 const Input = styled("input")({
   display: "none",
 });
 
 const NewClassified = ({ categories = [], onClose }) => {
-  const appContext = useContext(AppContext);
+  const appContext = useAppContext();
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
