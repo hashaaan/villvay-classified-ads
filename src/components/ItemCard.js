@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Card,
@@ -9,6 +10,13 @@ import {
 import { FavoriteBorder, Favorite } from "@mui/icons-material";
 
 const ItemCard = ({ item, onClick, onFavorite }) => {
+  let navigate = useNavigate();
+
+  const handleItemClick = () => {
+    onClick(item);
+    navigate(`/ad-details/${item.id}`);
+  };
+
   return (
     <Card>
       <Box
@@ -43,7 +51,7 @@ const ItemCard = ({ item, onClick, onFavorite }) => {
           {item.isFavourite ? <Favorite /> : <FavoriteBorder />}
         </IconButton>
       </Box>
-      <CardActionArea onClick={onClick}>
+      <CardActionArea onClick={handleItemClick}>
         <CardContent>
           <Typography
             sx={{ fontSize: 10, fontWeight: "600", letterSpacing: 1 }}

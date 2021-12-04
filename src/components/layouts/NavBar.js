@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Container,
+  Tab,
+  Tabs,
+} from "@mui/material";
 
 const NavBar = ({ page }) => {
   let navigate = useNavigate();
@@ -22,7 +24,8 @@ const NavBar = ({ page }) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: "auto", display: { md: "flex" } }}
+            sx={{ mr: "auto", display: { md: "flex" }, cursor: "pointer" }}
+            onClick={() => navigate("/")}
           >
             Classified Ads
           </Typography>
