@@ -11,6 +11,7 @@ import {
   TextField,
   Stack,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 import { AppContext } from "../../context/AppContext";
 
@@ -20,6 +21,7 @@ const Input = styled("input")({
 
 const NewClassified = ({ categories = [], onClose }) => {
   const appContext = useContext(AppContext);
+  const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -56,17 +58,19 @@ const NewClassified = ({ categories = [], onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newClassified = {
+    setLoading(true);
+    appContext.addItem({
       id: generateNextId(),
       category,
       name: title,
       description,
       imageUrl: image,
       isFavourite: false,
-    };
-    appContext.addItem(newClassified);
-    console.log(newClassified);
-    onClose();
+    });
+    setTimeout(() => {
+      setLoading(false);
+      onClose();
+    }, 3000);
   };
 
   return (
@@ -115,14 +119,15 @@ const NewClassified = ({ categories = [], onClose }) => {
           />
           <Button component="span">Upload Photo</Button>
         </label>
-        <Button
+        <LoadingButton
           variant="contained"
           color="primary"
           sx={{ borderRadius: 20 }}
           onClick={handleSubmit}
+          loading={loading}
         >
           Save and Publish
-        </Button>
+        </LoadingButton>
       </Stack>
     </Box>
   );
