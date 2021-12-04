@@ -30,7 +30,7 @@ const ItemCard = ({ item, onClick, onFavorite }) => {
       >
         <IconButton
           color="primary"
-          aria-label="add to favorites"
+          data-testid="favourite-button"
           sx={[
             {
               backgroundColor: "#FFF",

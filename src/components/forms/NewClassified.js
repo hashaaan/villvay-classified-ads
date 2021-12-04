@@ -3,17 +3,16 @@ import { styled } from "@mui/material/styles";
 import {
   Button,
   Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Typography,
   TextField,
   Stack,
+  IconButton,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { Close } from "@mui/icons-material";
 
 import { useAppContext } from "../../context/AppContext";
+import AppSelect from "../AppSelect";
 
 const Input = styled("input")({
   display: "none",
@@ -78,6 +77,28 @@ const NewClassified = ({ categories = [], onClose }) => {
       <Typography variant="h5" sx={{ mb: 2 }}>
         New Classified
       </Typography>
+      <IconButton
+        color="primary"
+        data-testid="drawer-close-button"
+        sx={[
+          {
+            position: "absolute",
+            color: "#646464",
+            margin: "10px",
+            height: "40px",
+            top: "10px",
+            right: "10px",
+          },
+          {
+            "&:hover": {
+              color: "#1976d2",
+            },
+          },
+        ]}
+        onClick={() => onClose()}
+      >
+        <Close />
+      </IconButton>
       <Stack component="form" spacing={2}>
         <TextField
           id="ad-title"
@@ -85,23 +106,13 @@ const NewClassified = ({ categories = [], onClose }) => {
           variant="outlined"
           onChange={handleChangeTitle}
         />
-        <FormControl sx={{ minWidth: 300 }}>
-          <InputLabel id="select-label-cat">Category</InputLabel>
-          <Select
-            labelId="select-label-cat"
-            id="select-cat"
-            value={category}
-            label="Category"
-            onChange={handleChageCategory}
-          >
-            {categories.length > 0 &&
-              categories.map(({ id, name, value }) => (
-                <MenuItem key={id} value={value}>
-                  {name}
-                </MenuItem>
-              ))}
-          </Select>
-        </FormControl>
+        <AppSelect
+          items={categories}
+          minWidth={300}
+          label="Category"
+          value={category}
+          onChange={handleChageCategory}
+        />
         <TextField
           id="ad-description"
           label="Description"
@@ -125,6 +136,7 @@ const NewClassified = ({ categories = [], onClose }) => {
           sx={{ borderRadius: 20 }}
           onClick={handleSubmit}
           loading={loading}
+          data-testid="new-classified-submit"
         >
           Save and Publish
         </LoadingButton>

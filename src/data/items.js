@@ -1,4 +1,4 @@
-const items = [
+export const items = [
   {
     id: 1,
     name: "Lorem ipsum dolor sit amet",
@@ -72,5 +72,3 @@ const items = [
     isFavourite: false,
   },
 ];
-
-export { items };
